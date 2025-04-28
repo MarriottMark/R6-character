@@ -84,7 +84,8 @@
 <div id="controls">
   <button id="submit" onclick="pickRandom()">Submit</button>
   <div id="extras">
-    <button onclick="checkAll()">Check All</button>
+    <button onclick="checkAllAttackers()">Check All Attackers</button>
+    <button onclick="checkAllDefenders()">Check All Defenders</button>
     <button onclick="uncheckAll()">Uncheck All</button>
   </div>
 </div>
@@ -93,81 +94,72 @@
 
 <script>
 const characters = [
-  { name: "Ace", img: "images/AceIconN.png" },
-  { name: "Alibi", img: "images/AlibiIconN.png" },
-  { name: "Amaru", img: "images/AmaruIconN.png" },
-  { name: "Aruni", img: "images/AruniIconN.png" },
-  { name: "Ash", img: "images/AshIconN.png" },
-  { name: "Azami", img: "images/Azami_Icon.png" },
-  { name: "Buck", img: "images/BADGE_Buck_L.png" },
-  { name: "Frost", img: "images/BADGE_Frost_L.png" },
-  { name: "Tachanka", img: "images/BADGE_Tachanka_L.png" },
-  { name: "Bandit", img: "images/BanditIconN.png" },
-  { name: "Blackbeard", img: "images/BlackbeardIconN.png" },
-  { name: "Blitz", img: "images/BlitzIconN.png" },
-  { name: "Brava", img: "images/Brava_icon.png" },
-  { name: "Capitao", img: "images/CapitaoIconN.png" },
-  { name: "Castle", img: "images/CastleIconN.png" },
-  { name: "Caveira", img: "images/CaveiraIconN.png" },
-  { name: "Clash", img: "images/ClashIconN.png" },
-  { name: "Doc", img: "images/DocIconN.png" },
-  { name: "Dokkaebi", img: "images/DokkaebiIconN.png" },
-  { name: "Echo", img: "images/EchoIconN.png" },
-  { name: "Ela", img: "images/ElaIconN.png" },
-  { name: "Finka", img: "images/FinkaIconN.png" },
-  { name: "Flores", img: "images/FloresIconN.png" },
-  { name: "Fuze", img: "images/FuzeIconN.png" },
-  { name: "Glaz", img: "images/GlazIconN.png" },
-  { name: "Goyo", img: "images/GoyoIconN.png" },
-  { name: "Gridlock", img: "images/GridlockIconN.png" },
-  { name: "Grim", img: "images/Grim_Icon.png" },
-  { name: "Hibana", img: "images/HibanaIconN.png" },
-  { name: "Iana", img: "images/IanaIconN.png" },
-  { name: "IQ", img: "images/IqIconN.png" },
-  { name: "Jackal", img: "images/JackalIconN.png" },
-  { name: "Jager", img: "images/JagerIconN.png" },
-  { name: "Kaid", img: "images/KaidIconN.png" },
-  { name: "Kali", img: "images/KaliIconN.png" },
-  { name: "Kapkan", img: "images/KapkanIconN.png" },
-  { name: "Lesion", img: "images/LesionIconN.png" },
-  { name: "Lion", img: "images/LionIconN.png" },
-  { name: "Maestro", img: "images/MaestroIconN.png" },
-  { name: "Maverick", img: "images/MaverickIconN.png" },
-  { name: "Melusi", img: "images/MelusiIconN.png" },
-  { name: "Mira", img: "images/MiraIconN.png" },
-  { name: "Montagne", img: "images/MontagneIconN.png" },
-  { name: "Mozzie", img: "images/MozzieIconN.png" },
-  { name: "Mute", img: "images/MuteIconN.png" },
-  { name: "Nokk", img: "images/NokkIconN.png" },
-  { name: "Nomad", img: "images/NomadIconN.png" },
-  { name: "Oryx", img: "images/OryxIconN.png" },
-  { name: "Osa", img: "images/Osa_Icon.png" },
-  { name: "Pulse", img: "images/PulseIconN.png" },
-  { name: "Deimos", img: "images/R6S_Y9S1_Deimos_Icon.png" },
-  { name: "Tubarao", img: "images/TubaraoIcon.png" },
-  { name: "Aura", img: "images/RAUORA_ICON_HIGH_RES.png" },
-  { name: "Rook", img: "images/RookIconN.png" },
-  { name: "Sens", img: "images/Sens_Icon.png" },
-  { name: "Sentry", img: "images/Sentry_Icon.png" },
-  { name: "Sledge", img: "images/SledgeNewestIcon.png" },
-  { name: "Smoke", img: "images/SmokeIconN.png" },
-  { name: "Solis", img: "images/Solis_icon.png" },
-  { name: "Skopos", img: "images/SkoposIcon.png" },
-  { name: "Striker", img: "images/Striker_Icon.png" },
-  { name: "Thatcher", img: "images/ThatcherNewestIcon.png" },
-  { name: "Thermite", img: "images/ThermiteIconN.png" },
-  { name: "Thorn", img: "images/Thorn_icon.png" },
-  { name: "Thunderbird", img: "images/Thunderbird_Icon.png" },
-  { name: "Twitch", img: "images/TwitchIconN.png" },
-  { name: "Vigil", img: "images/VigilIconN.png" },
-  { name: "Wamai", img: "images/WamaiIconN.png" },
-  { name: "Warden", img: "images/WardenIconN.png" },
-  { name: "Fenrir", img: "images/Y8S2_-_FENRIR_ICON_.png" },
-  { name: "Ram", img: "images/Y8S3_-_RAM_ICON.png" },
-  { name: "Ying", img: "images/YingIconN.png" },
-  { name: "Zero", img: "images/ZeroIconN.png" },
-  { name: "Zofia", img: "images/ZofiaIconN.png" }
+  { name: "Ace", img: "images/AceIconN.png", type: "attacker" },
+  { name: "Alibi", img: "images/AlibiIconN.png", type: "defender" },
+  { name: "Amaru", img: "images/AmaruIconN.png", type: "attacker" },
+  { name: "Aruni", img: "images/AruniIconN.png", type: "defender" },
+  { name: "Ash", img: "images/AshIconN.png", type: "attacker" },
+  { name: "Azami", img: "images/Azami_Icon.png", type: "defender" },
+  { name: "Bandit", img: "images/BanditIconN.png", type: "defender" },
+  { name: "Blackbeard", img: "images/BlackbeardIconN.png", type: "attacker" },
+  { name: "Blitz", img: "images/BlitzIconN.png", type: "attacker" },
+  { name: "Brava", img: "images/Brava_icon.png", type: "attacker" },
+  { name: "Buck", img: "images/BADGE_Buck_L.png", type: "attacker" },
+  { name: "Capitao", img: "images/CapitaoIconN.png", type: "attacker" },
+  { name: "Castle", img: "images/CastleIconN.png", type: "defender" },
+  { name: "Caveira", img: "images/CaveiraIconN.png", type: "defender" },
+  { name: "Clash", img: "images/ClashIconN.png", type: "defender" },
+  { name: "Doc", img: "images/DocIconN.png", type: "defender" },
+  { name: "Dokkaebi", img: "images/DokkaebiIconN.png", type: "attacker" },
+  { name: "Echo", img: "images/EchoIconN.png", type: "defender" },
+  { name: "Ela", img: "images/ElaIconN.png", type: "defender" },
+  { name: "Finka", img: "images/FinkaIconN.png", type: "attacker" },
+  { name: "Flores", img: "images/FloresIconN.png", type: "attacker" },
+  { name: "Fuze", img: "images/FuzeIconN.png", type: "attacker" },
+  { name: "Glaz", img: "images/GlazIconN.png", type: "attacker" },
+  { name: "Goyo", img: "images/GoyoIconN.png", type: "defender" },
+  { name: "Gridlock", img: "images/GridlockIconN.png", type: "attacker" },
+  { name: "Grim", img: "images/Grim_Icon.png", type: "attacker" },
+  { name: "Hibana", img: "images/HibanaIconN.png", type: "attacker" },
+  { name: "Iana", img: "images/IanaIconN.png", type: "attacker" },
+  { name: "IQ", img: "images/IqIconN.png", type: "attacker" },
+  { name: "Jackal", img: "images/JackalIconN.png", type: "attacker" },
+  { name: "Jager", img: "images/JagerIconN.png", type: "defender" },
+  { name: "Kaid", img: "images/KaidIconN.png", type: "defender" },
+  { name: "Kali", img: "images/KaliIconN.png", type: "attacker" },
+  { name: "Kapkan", img: "images/KapkanIconN.png", type: "defender" },
+  { name: "Lesion", img: "images/LesionIconN.png", type: "defender" },
+  { name: "Lion", img: "images/LionIconN.png", type: "attacker" },
+  { name: "Maestro", img: "images/MaestroIconN.png", type: "defender" },
+  { name: "Maverick", img: "images/MaverickIconN.png", type: "attacker" },
+  { name: "Melusi", img: "images/MelusiIconN.png", type: "defender" },
+  { name: "Mira", img: "images/MiraIconN.png", type: "defender" },
+  { name: "Montagne", img: "images/MontagneIconN.png", type: "attacker" },
+  { name: "Mozzie", img: "images/MozzieIconN.png", type: "defender" },
+  { name: "Mute", img: "images/MuteIconN.png", type: "defender" },
+  { name: "Nokk", img: "images/NokkIconN.png", type: "attacker" },
+  { name: "Nomad", img: "images/NomadIconN.png", type: "attacker" },
+  { name: "Oryx", img: "images/OryxIconN.png", type: "defender" },
+  { name: "Osa", img: "images/Osa_Icon.png", type: "attacker" },
+  { name: "Pulse", img: "images/PulseIconN.png", type: "defender" },
+  { name: "Rook", img: "images/RookIconN.png", type: "defender" },
+  { name: "Sledge", img: "images/SledgeNewestIcon.png", type: "attacker" },
+  { name: "Smoke", img: "images/SmokeIconN.png", type: "defender" },
+  { name: "Solis", img: "images/Solis_icon.png", type: "attacker" },
+  { name: "Tachanka", img: "images/BADGE_Tachanka_L.png", type: "defender" },
+  { name: "Thatcher", img: "images/ThatcherNewestIcon.png", type: "attacker" },
+  { name: "Thermite", img: "images/ThermiteIconN.png", type: "attacker" },
+  { name: "Thorn", img: "images/Thorn_icon.png", type: "defender" },
+  { name: "Twitch", img: "images/TwitchIconN.png", type: "attacker" },
+  { name: "Vigil", img: "images/VigilIconN.png", type: "defender" },
+  { name: "Wamai", img: "images/WamaiIconN.png", type: "defender" },
+  { name: "Warden", img: "images/WardenIconN.png", type: "defender" },
+  { name: "Ying", img: "images/YingIconN.png", type: "attacker" },
+  { name: "Zofia", img: "images/ZofiaIconN.png", type: "attacker" }
 ];
+
+// Sorting characters by name
+characters.sort((a, b) => a.name.localeCompare(b.name));
 
 const excluded = new Set();
 
@@ -230,9 +222,22 @@ function pickRandom() {
   resultDiv.appendChild(name);
 }
 
-function checkAll() {
-  characters.forEach((_, index) => excluded.add(index));
-  document.querySelectorAll('.portrait').forEach(div => div.classList.add('excluded'));
+function checkAllAttackers() {
+  characters.filter(c => c.type === 'attacker').forEach((_, index) => excluded.add(index));
+  document.querySelectorAll('.portrait').forEach(div => {
+    if (characters[div.dataset.index].type === 'attacker') {
+      div.classList.add('excluded');
+    }
+  });
+}
+
+function checkAllDefenders() {
+  characters.filter(c => c.type === 'defender').forEach((_, index) => excluded.add(index));
+  document.querySelectorAll('.portrait').forEach(div => {
+    if (characters[div.dataset.index].type === 'defender') {
+      div.classList.add('excluded');
+    }
+  });
 }
 
 function uncheckAll() {
