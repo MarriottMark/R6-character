@@ -43,76 +43,147 @@
 <div id="result"></div>
 
 <script>
+const characters = [
+  { name: "Ace", img: "images/AceIconN.png" },
+  { name: "Alibi", img: "images/AlibiIconN.png" },
+  { name: "Amaru", img: "images/AmaruIconN.png" },
+  { name: "Aruni", img: "images/AruniIconN.png" },
+  { name: "Ash", img: "images/AshIconN.png" },
+  { name: "Azami", img: "images/Azami_Icon.png" },
+  { name: "Buck", img: "images/BADGE_Buck_L.png" },
+  { name: "Frost", img: "images/BADGE_Frost_L.png" },
+  { name: "Tachanka", img: "images/BADGE_Tachanka_L.png" },
+  { name: "Bandit", img: "images/BanditIconN.png" },
+  { name: "Blackbeard", img: "images/BlackbeardIconN.png" },
+  { name: "Blitz", img: "images/BlitzIconN.png" },
+  { name: "Brava", img: "images/Brava_icon.png" },
+  { name: "Capitao", img: "images/CapitaoIconN.png" },
+  { name: "Castle", img: "images/CastleIconN.png" },
+  { name: "Caveira", img: "images/CaveiraIconN.png" },
+  { name: "Clash", img: "images/ClashIconN.png" },
+  { name: "Doc", img: "images/DocIconN.png" },
+  { name: "Dokkaebi", img: "images/DokkaebiIconN.png" },
+  { name: "Echo", img: "images/EchoIconN.png" },
+  { name: "Ela", img: "images/ElaIconN.png" },
+  { name: "Finka", img: "images/FinkaIconN.png" },
+  { name: "Flores", img: "images/FloresIconN-1.png" },  // If duplicate, pick one.
+  { name: "Fuze", img: "images/FuzeIconN.png" },
+  { name: "Glaz", img: "images/GlazIconN.png" },
+  { name: "Goyo", img: "images/GoyoIconN.png" },
+  { name: "Gridlock", img: "images/GridlockIconN.png" },
+  { name: "Grim", img: "images/Grim_Icon.png" },
+  { name: "Hibana", img: "images/HibanaIconN.png" },
+  { name: "Iana", img: "images/IanaIconN.png" },
+  { name: "IQ", img: "images/IqIconN.png" },
+  { name: "Jackal", img: "images/JackalIconN.png" },
+  { name: "Jager", img: "images/JagerIconN.png" },
+  { name: "Kaid", img: "images/KaidIconN.png" },
+  { name: "Kali", img: "images/KaliIconN.png" },
+  { name: "Kapkan", img: "images/KapkanIconN.png" },
+  { name: "Lesion", img: "images/LesionIconN.png" },
+  { name: "Lion", img: "images/LionIconN.png" },
+  { name: "Maestro", img: "images/MaestroIconN.png" },
+  { name: "Maverick", img: "images/MaverickIconN.png" },  // Again if duplicate, pick the right one.
+  { name: "Melusi", img: "images/MelusiIconN.png" },
+  { name: "Mira", img: "images/MiraIconN.png" },
+  { name: "Montagne", img: "images/MontagneIconN.png" },
+  { name: "Mozzie", img: "images/MozzieIconN.png" },
+  { name: "Mute", img: "images/MuteIconN.png" },
+  { name: "Nokk", img: "images/NokkIconN.png" },
+  { name: "Nomad", img: "images/NomadIconN.png" },
+  { name: "Oryx", img: "images/OryxIconN.png" },
+  { name: "Osa", img: "images/Osa_Icon.png" },
+  { name: "Pulse", img: "images/PulseIconN.png" },
+  { name: "Deimos", img: "images/R6S_Y9S1_Deimos_Icon.png" },
+  { name: "Tubarão", img: "images/R6S_Tubar%3Fo_Icon.png" },
+  { name: "Aura", img: "images/RAUORA_ICON_HIGH_RES.png" },
+  { name: "Rook", img: "images/RookIconN.png" },
+  { name: "Sens", img: "images/Sens_Icon.png" },
+  { name: "Sentry", img: "images/Sentry_Icon.png" },
+  { name: "Sledge", img: "images/SledgeNewestIcon.png" },
+  { name: "Smoke", img: "images/SmokeIconN.png" },
+  { name: "Solis", img: "images/Solis_icon.png" },
+  { name: "Spoke", img: "images/Spok%3FsIcon.png" },
+  { name: "Striker", img: "images/Striker_Icon.png" },
+  { name: "Thatcher", img: "images/ThatcherNewestIcon.png" },
+  { name: "Thermite", img: "images/ThermiteIconN.png" },
+  { name: "Thorn", img: "images/Thorn_icon.png" },
+  { name: "Thunderbird", img: "images/Thunderbird_Icon.png" },
+  { name: "Twitch", img: "images/TwitchIconN.png" },
+  { name: "Vigil", img: "images/VigilIconN.png" },
+  { name: "Wamai", img: "images/WamaiIconN.png" },
+  { name: "Warden", img: "images/WardenIconN.png" },
+  { name: "Fenrir", img: "images/Y8S2_-_FENRIR_ICON_.png" },
+  { name: "Ram", img: "images/Y8S3_-_RAM_ICON.png" },
+  { name: "Ying", img: "images/YingIconN.png" },
+  { name: "Zero", img: "images/ZeroIconN.png" },
+  { name: "Zofia", img: "images/ZofiaIconN.png" }
+];
 
-  const characters = [
-    {name: "Ash", img: "images/ash.png" },
-  ];
+const excluded = new Set();
 
-  const excluded = new Set();
+function createGallery() {
+  const gallery = document.getElementById('gallery');
+  characters.forEach((character, index) => {
+    const div = document.createElement('div');
+    div.classList.add('portrait');
+    div.dataset.index = index;
 
-  function createGallery() {
-    const gallery = document.getElementById('gallery');
-    characters.forEach((character, index) => {
-      const div = document.createElement('div');
-      div.classList.add('portrait');
-      div.dataset.index = index;
-
-      const img = document.createElement('img');
-      img.src = character.img;
-      img.alt = character.name;
-
-      div.appendChild(img);
-      gallery.appendChild(div);
-
-      div.addEventListener('click', () => {
-        if (excluded.has(index)) {
-          excluded.delete(index);
-          div.classList.remove('excluded');
-        } else {
-          excluded.add(index);
-          div.classList.add('excluded');
-        }
-      });
-    });
-  }
-
-  function pickRandom() {
-    const available = characters.filter((_, index) => !excluded.has(index));
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = ''; // Clear previous result
-
-    if (available.length === 0) {
-      resultDiv.innerText = 'No characters available!';
-      return;
-    }
-
-    const randomCharacter = available[Math.floor(Math.random() * available.length)];
-
-    // Create and show the portrait
     const img = document.createElement('img');
-    img.src = randomCharacter.img;
-    img.alt = randomCharacter.name;
-    img.style.width = '150px';
-    img.style.height = '150px';
-    img.style.objectFit = 'cover';
-    img.style.borderRadius = '10px';
-    img.style.display = 'block';
-    img.style.margin = '10px auto';
+    img.src = character.img;
+    img.alt = character.name;
 
-    // Create and show the name below the portrait
-    const name = document.createElement('div');
-    name.innerText = randomCharacter.name;
-    name.style.textAlign = 'center';
-    name.style.marginTop = '5px';
-    name.style.fontWeight = 'bold';
-    name.style.fontSize = '20px';
+    div.appendChild(img);
+    gallery.appendChild(div);
 
-    resultDiv.appendChild(img);
-    resultDiv.appendChild(name);
+    div.addEventListener('click', () => {
+      if (excluded.has(index)) {
+        excluded.delete(index);
+        div.classList.remove('excluded');
+      } else {
+        excluded.add(index);
+        div.classList.add('excluded');
+      }
+    });
+  });
+}
+
+function pickRandom() {
+  const available = characters.filter((_, index) => !excluded.has(index));
+  const resultDiv = document.getElementById('result');
+  resultDiv.innerHTML = '';
+
+  if (available.length === 0) {
+    resultDiv.innerText = 'No characters available!';
+    return;
   }
 
-  createGallery();
+  const randomCharacter = available[Math.floor(Math.random() * available.length)];
+
+  const img = document.createElement('img');
+  img.src = randomCharacter.img;
+  img.alt = randomCharacter.name;
+  img.style.width = '150px';
+  img.style.height = '150px';
+  img.style.objectFit = 'cover';
+  img.style.borderRadius = '10px';
+  img.style.display = 'block';
+  img.style.margin = '10px auto';
+
+  const name = document.createElement('div');
+  name.innerText = randomCharacter.name;
+  name.style.textAlign = 'center';
+  name.style.marginTop = '5px';
+  name.style.fontWeight = 'bold';
+  name.style.fontSize = '20px';
+
+  resultDiv.appendChild(img);
+  resultDiv.appendChild(name);
+}
+
+createGallery();
 </script>
+
 
 
 </body>
