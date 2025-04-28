@@ -223,18 +223,20 @@ function pickRandom() {
 }
 
 function checkAllAttackers() {
-  characters.filter(c => c.type === 'attacker').forEach((_, index) => excluded.add(index));
   document.querySelectorAll('.portrait').forEach(div => {
-    if (characters[div.dataset.index].type === 'attacker') {
+    const index = Number(div.dataset.index);
+    if (characters[index].type === 'attacker') {
+      excluded.add(index);
       div.classList.add('excluded');
     }
   });
 }
 
 function checkAllDefenders() {
-  characters.filter(c => c.type === 'defender').forEach((_, index) => excluded.add(index));
   document.querySelectorAll('.portrait').forEach(div => {
-    if (characters[div.dataset.index].type === 'defender') {
+    const index = Number(div.dataset.index);
+    if (characters[index].type === 'defender') {
+      excluded.add(index);
       div.classList.add('excluded');
     }
   });
