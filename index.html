@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Rainbow Six Random Picker</title>
   <style>
-  
   .gallery {
     display: flex;
     flex-wrap: wrap;
@@ -34,59 +33,56 @@
     opacity: 0.5;
   }
 
-    
-    #controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px;
-      gap: 40px;
-    }
+  #controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 40px;
+  }
 
-    #submit {
-      padding: 15px 30px;
-      font-size: 18px;
-      font-weight: bold;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+  #submit {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
 
-    #submit:hover {
-      background-color: #45a049;
-    }
+  #submit:hover {
+    background-color: #45a049;
+  }
 
-    #extras {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+  #extras {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
-    #extras button {
-      padding: 10px 20px;
-      font-size: 14px;
-      background-color: #008CBA;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+  #extras button {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
 
-    #extras button:hover {
-      background-color: #007bb5;
-    }
+  #extras button:hover {
+    background-color: #007bb5;
+  }
   </style>
 </head>
 <body>
 
 <div class="gallery" id="gallery"></div>
 
-<!-- Controls section -->
 <div id="controls">
   <button id="submit" onclick="pickRandom()">Submit</button>
-  
   <div id="extras">
     <button onclick="checkAll()">Check All</button>
     <button onclick="uncheckAll()">Uncheck All</button>
@@ -235,13 +231,13 @@ function pickRandom() {
 }
 
 function checkAll() {
-  characters.forEach((_, index) => excluded.delete(index));
-  document.querySelectorAll('.portrait').forEach(div => div.classList.remove('excluded'));
+  characters.forEach((_, index) => excluded.add(index));
+  document.querySelectorAll('.portrait').forEach(div => div.classList.add('excluded'));
 }
 
 function uncheckAll() {
-  characters.forEach((_, index) => excluded.add(index));
-  document.querySelectorAll('.portrait').forEach(div => div.classList.add('excluded'));
+  characters.forEach((_, index) => excluded.delete(index));
+  document.querySelectorAll('.portrait').forEach(div => div.classList.remove('excluded'));
 }
 
 createGallery();
