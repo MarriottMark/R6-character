@@ -79,11 +79,41 @@
     });
   }
 
-  function pickRandom() {
-    const available = characters.filter((_, index) => !excluded.has(index));
-    if (available.length === 0) {
-      document.getElementById('result').innerText = 'No characters available!';
-      return;
+ function pickRandom() {
+  const available = characters.filter((_, index) => !excluded.has(index));
+  const resultDiv = document.getElementById('result');
+  resultDiv.innerHTML = ''; // Clear previous result
+
+  if (available.length === 0) {
+    resultDiv.innerText = 'No characters available!';
+    return;
+  }
+
+  const randomCharacter = available[Math.floor(Math.random() * available.length)];
+
+  // Create and show the portrait
+  const img = document.createElement('img');
+  img.src = randomCharacter.img;
+  img.alt = randomCharacter.name;
+  img.style.width = '150px';
+  img.style.height = '150px';
+  img.style.objectFit = 'cover';
+  img.style.borderRadius = '10px';
+  img.style.display = 'block';
+  img.style.margin = '10px auto';
+
+  // Create and show the name below the portrait
+  const name = document.createElement('div');
+  name.innerText = randomCharacter.name;
+  name.style.textAlign = 'center';
+  name.style.marginTop = '5px';
+  name.style.fontWeight = 'bold';
+  name.style.fontSize = '20px';
+
+  resultDiv.appendChild(img);
+  resultDiv.appendChild(name);
+}
+
     }
     const randomCharacter = available[Math.floor(Math.random() * available.length)];
     document.getElementById('result').innerText = `Random pick: ${randomCharacter.name}`;
