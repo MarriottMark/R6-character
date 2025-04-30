@@ -151,6 +151,7 @@ const characters = [
   { name: "Thermite", img: "images/ThermiteIconN.png", type: "attacker" },
   { name: "Thorn", img: "images/Thorn_icon.png", type: "defender" },
   { name: "Twitch", img: "images/TwitchIconN.png", type: "attacker" },
+  { name: "Valkyrie", img: "images/ValkyrieIconN.png", type: "defender"},
   { name: "Vigil", img: "images/VigilIconN.png", type: "defender" },
   { name: "Wamai", img: "images/WamaiIconN.png", type: "defender" },
   { name: "Warden", img: "images/WardenIconN.png", type: "defender" },
@@ -158,7 +159,6 @@ const characters = [
   { name: "Zofia", img: "images/ZofiaIconN.png", type: "attacker" }
 ];
 
-// Sorting characters by name
 characters.sort((a, b) => a.name.localeCompare(b.name));
 
 const excluded = new Set();
